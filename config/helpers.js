@@ -4,14 +4,14 @@ var nodemailer = require("nodemailer");
 const CONSTANTS = require("./constants");
 
 exports.generateToken = (user, statusCode) => {
-	console.log("user  in token:", user.dataValues);
+	// console.log("user  in token:", user.dataValues);
 	let result = {};
 
 	// calling user instance method to get signed JWT token from Model
 	const accessToken = user.getJWTSignedToken();
 	const userId = user.dataValues.userId;
 	const role = user.dataValues.role;
-	console.log("userId : ", userId);
+	// console.log("userId : ", userId);
 	// var accessToken = jwt.sign({ id: user.userId }, process.env.JWT_SECRET, {
 	// 	expiresIn: 86400, // 24 hours
 	// });
