@@ -82,7 +82,7 @@ exports.register = async (body) => {
 exports.login = async (email, password) => {
 	let result = {};
 	const user = await User.scope("withPwd").findOne({ where: { email } });
-	// console.log('user : ', user);
+	console.log("user : ", user);
 	if (!user) {
 		result.message = `Invalid Credentials`;
 		result.statusCode = 401;
@@ -98,7 +98,7 @@ exports.login = async (email, password) => {
 	}
 
 	result = helper.generateToken(user, 200);
-	// console.log("result : ", result);
+	console.log("result : ", result);
 	return result;
 };
 

@@ -37,23 +37,21 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
 	const { email, password } = req.body;
 
 	if (!email || !password)
-	return res.status(400)
-		.json({
+		return res.status(400).json({
 			success: false,
-			message: 'Please provide all credentials'
+			message: "Please provide all credentials",
 		});
-		// return next(new ErrorResponse(`Please provide all credentials`, 400));
+	// return next(new ErrorResponse(`Please provide all credentials`, 400));
 
 	const result = await login(email, password);
 	// console.log("result :", result);
 
 	if (result.message)
-	return res.status(result.statusCode)
-		.json({
+		return res.status(result.statusCode).json({
 			success: false,
-			message: result.message
+			message: result.message,
 		});
-		// return next(new ErrorResponse(result.message, result.statusCode));
+	// return next(new ErrorResponse(result.message, result.statusCode));
 
 	res
 		.status(200)
@@ -62,6 +60,8 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
 			success: true,
 			data: {
 				accessToken: result.accessToken,
+				userId: result.userId,
+				userRole: result.role,
 			},
 		});
 });
@@ -93,24 +93,22 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 	const { email, password } = req.body;
 
 	if (!email || !password)
-	return res.status(400)
-		.json({
+		return res.status(400).json({
 			success: false,
-			message: 'Email cannot be empty'
+			message: "Email cannot be empty",
 		});
 
-		// return next(new ErrorResponse(`Email cannot be empty`, 400));
+	// return next(new ErrorResponse(`Email cannot be empty`, 400));
 
 	const result = await forgotPassword(email, password);
 	// console.log("result :", result);
 
 	if (result.err)
-	return res.status(result.statusCode)
-		.json({
+		return res.status(result.statusCode).json({
 			success: false,
-			message: result.message
+			message: result.message,
 		});
-		// return next(new ErrorResponse(result.message, result.statusCode));
+	// return next(new ErrorResponse(result.message, result.statusCode));
 
 	res.status(200).json({
 		success: true,

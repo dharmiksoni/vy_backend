@@ -4,11 +4,14 @@ var nodemailer = require("nodemailer");
 const CONSTANTS = require("./constants");
 
 exports.generateToken = (user, statusCode) => {
-	// console.log("user :", user);
+	console.log("user  in token:", user.dataValues);
 	let result = {};
 
 	// calling user instance method to get signed JWT token from Model
 	const accessToken = user.getJWTSignedToken();
+	const userId = user.dataValues.userId;
+	const role = user.dataValues.role;
+	console.log("userId : ", userId);
 	// var accessToken = jwt.sign({ id: user.userId }, process.env.JWT_SECRET, {
 	// 	expiresIn: 86400, // 24 hours
 	// });
@@ -26,6 +29,8 @@ exports.generateToken = (user, statusCode) => {
 	result.accessToken = accessToken;
 	result.statusCode = statusCode;
 	result.cookieOptions = options;
+	result.userId = userId;
+	result.role = role;
 	// console.log("result : ", result);
 	return result;
 };
@@ -59,12 +64,12 @@ exports.sendmail = async (toEmail, subject, content, userToken) => {
 };
 
 // var transporter = nodemailer.createTransport({ service: 'Sendgrid', auth: { user: process.env.SENDGRID_USERNAME, pass: process.env.SENDGRID_PASSWORD } });
-// var mailOptions = { from: 'no-reply@example.com', to: user.email, subject: 'Account Verification Link', 
+// var mailOptions = { from: 'no-reply@example.com', to: user.email, subject: 'Account Verification Link',
 // text: 'Hello '
-// + req.body.name +',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' 
+// + req.body.name +',\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/'
 // + req.headers.host + '\/confirmation\/' + user.email + '\/' + token.token + '\n\nThank You!\n' };
 // transporter.sendMail(mailOptions, function (err) {
-// 	if (err) { 
+// 	if (err) {
 // 		return res.status(500).send({msg:'Technical Issue!, Please click on resend for verify your Email.'});
 // 		}
 // 	return res.status(200).send('A verification email has been sent to ' + user.email + '. It will be expire after one day. If you not get verification Email click on resend token.');
