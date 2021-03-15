@@ -44,13 +44,13 @@ app.use("/vy/api/v1/", apiRouter);
 app.use(errorHandler);
 
 // Port for server
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
 // Starting Server
-const server = app.listen(PORT, () =>
+const server = app.listen(() =>
 	console.log(
-		`Server running in ${process.env.NODE_ENV} mode on PORT ${PORT}`.cyan
-			.underline
+		// `Server running in ${process.env.NODE_ENV} mode on PORT ${PORT}`.cyan
+		// 	.underline
 	)
 );
 

@@ -6,9 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "NODE_ENV=production node app.js",
-        "server": "nodemon --inspect app.js",
-        "frontend": "npm start --prefix frontend",
-        "dev": "concurrently \"npm run server\" \"npm run frontend\""
+        "server": "nodemon --inspect app.js"
     },
     "author": "Dharmik soni",
     "license": "ISC",
